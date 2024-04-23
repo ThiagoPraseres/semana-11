@@ -1,4 +1,3 @@
-
 const express = require('express') //Framework da aplicação
 const cors = require('cors') // Biblioteca utilizada para inserir headers http
 const { connection } = require('./database/connection') // Configuração de acesso ao banco de dados
