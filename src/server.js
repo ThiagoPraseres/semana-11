@@ -1,15 +1,20 @@
+
 const express = require('express') //Framework da aplicação
 const cors = require('cors') // Biblioteca utilizada para inserir headers http
 const { connection } = require('./database/connection') // Configuração de acesso ao banco de dados
+const routes = require('./routes/routes')
 
-const PORT_API = process.env.PORT_API 
+
+const PORT_API = process.env.PORT_API
 
 class Server {
-  constructor (server = express())// Argumento do constructor auto iniciado da aplicação para usarmos as devidas funções do express
-  { 
+  constructor(server = express())// Argumento do constructor auto iniciado da aplicação para usarmos as devidas funções do express
+  {
     this.middlewares(server) // Instância do argumento da função para a função middlewares
     this.database()  // Instância da função database
+    server.use(routes)
     this.initializeServer(server) // Instância da função initializeServer
+
   }
 
   async middlewares(app) {
@@ -26,6 +31,7 @@ class Server {
       throw error
     }
   }
+
   async initializeServer(app) {
     // Valor da porta do servidor
     app.listen(PORT_API, () => console.log(`Servidor executando na porta ${PORT_API}`)) // Execução do servidor
